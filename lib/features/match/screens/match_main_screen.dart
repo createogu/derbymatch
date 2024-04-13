@@ -1,6 +1,5 @@
-import 'package:derbymatch/features/court/screens/court_list_screen.dart';
-import 'package:derbymatch/features/court/screens/court_main_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:routemaster/routemaster.dart';
 
 class MatchMainScreen extends StatefulWidget {
   const MatchMainScreen({super.key});
@@ -12,6 +11,15 @@ class MatchMainScreen extends StatefulWidget {
 class _MatchMainScreenState extends State<MatchMainScreen> {
   @override
   Widget build(BuildContext context) {
-    return CourtMainScreen();
+    return Container(
+      child: Center(
+        child: TextButton(
+          onPressed: () {
+            Routemaster.of(context).push('/createMatch');
+          },
+          child: Text('매치생성'),
+        ),
+      ),
+    );
   }
 }

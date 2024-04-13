@@ -1,11 +1,10 @@
 import 'package:derbymatch/core/theme/pallete.dart';
-import 'package:derbymatch/features/community/screens/community_main_screen.dart';
 import 'package:derbymatch/features/home/screens/home_main_screen.dart';
 import 'package:derbymatch/features/setting/screens/setting_main_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/layout/default_layout.dart';
-import '../../court/screens/court_main_screen.dart';
+import '../../match/screens/match_main_screen.dart';
 import '../../player/screens/player_main_screen.dart';
 import '../../team/screens/team_main_screen.dart';
 
@@ -97,7 +96,7 @@ class _MainScreenState extends State<MainScreen>
             child: TeamMainScreen(),
           ),
           DefaultLayout(
-            child: CourtMainScreen(),
+            child: MatchMainScreen(),
           ),
           DefaultLayout(
             title: '커뮤니티',

@@ -9,26 +9,17 @@ import 'package:derbymatch/features/team/widgets/form/team_schedule_info_form_wi
 import 'package:derbymatch/features/team/widgets/view/team_schedule_info_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../../core/common/controllers/CommCodeController.dart';
 import '../../../core/common/widgets/bottomSheer/open_bottom_sheet.dart';
 import '../../../core/common/widgets/image/common_full_screen_image.dart';
 import '../../../core/common/widgets/image/common_rectangle_image_view.dart';
 import '../widgets/form/team_photo_form_widget.dart';
 
-class TeamIntroductionScreen extends ConsumerStatefulWidget {
+class TeamIntroductionScreen extends ConsumerWidget {
   final TeamModel teamModel;
 
   const TeamIntroductionScreen({required this.teamModel, super.key});
-
-  @override
-  _TeamIntroductionScreenState createState() => _TeamIntroductionScreenState();
-}
-
-class _TeamIntroductionScreenState
-    extends ConsumerState<TeamIntroductionScreen> {
-  late final teamController = ref.watch(TeamControllerProvider.notifier);
-  late final commCodeController =
-      ref.watch(commCodeControllerProvider.notifier);
 
   Widget infoSection(String title, String value) {
     return Expanded(
@@ -43,7 +34,10 @@ class _TeamIntroductionScreenState
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final teamController = ref.read(TeamControllerProvider.notifier);
+    final commCodeController = ref.read(commCodeControllerProvider.notifier);
+
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.all(AppSpaceSize.mediumSize),
@@ -56,27 +50,26 @@ class _TeamIntroductionScreenState
                 height: 40,
                 child: OpenBottomSheet(
                   heightRatio: 0.8,
-                  child:
-                      TeamIntroductionFormWidget(teamModel: widget.teamModel),
+                  child: TeamIntroductionFormWidget(teamModel: teamModel),
                 ),
               ),
             ),
             Row(
               children: [
-                infoSection('창립년도', '${widget.teamModel.since_year}년'),
-                infoSection('활동지역', widget.teamModel.addressName),
+                infoSection('창립년도', '${teamModel.since_year}년'),
+                infoSection('활동지역', teamModel.addressName),
                 infoSection(
                     '부종',
                     commCodeController.getCommCodeName(
-                            'division', widget.teamModel.division) ??
+                            'division', teamModel.division) ??
                         '정보 없음'),
               ],
             ),
             SizedBox(height: 20),
             Container(
               alignment: Alignment.topLeft,
-              child: Text(widget.teamModel.introduce,
-                  style: AppTextStyles.infoTextStyle),
+              child:
+                  Text(teamModel.introduce, style: AppTextStyles.infoTextStyle),
             ),
             SizedBox(height: 20),
             TitleDivider(
@@ -85,13 +78,14 @@ class _TeamIntroductionScreenState
                 height: 40,
                 child: OpenBottomSheet(
                   heightRatio: 0.8,
-                  child: TeamScheduleInfoFormWidget(
-                      team_id: widget.teamModel.team_id),
+                  child: TeamScheduleInfoFormWidget(team_id: teamModel.team_id),
                 ),
               ),
             ),
             teamInfoSection(
-                teamController.getTeamSchedules(widget.teamModel.team_id),
+                context,
+                ref,
+                teamController.getTeamSchedules(teamModel.team_id),
                 '일정',
                 buildScheduleWidget),
             AppSpacesBox.verticalSpaceMedium,
@@ -101,14 +95,17 @@ class _TeamIntroductionScreenState
                 height: 40,
                 child: OpenBottomSheet(
                   heightRatio: 0.8,
-                  child: TeamPhotoFormWidget(team_id: widget.teamModel.team_id),
+                  child: TeamPhotoFormWidget(team_id: teamModel.team_id),
                 ),
               ),
             ),
             teamInfoSection(
-                teamController.getTeamPhotosList(widget.teamModel.team_id),
+                context,
+                ref,
+                teamController.getTeamPhotosList(teamModel.team_id),
                 '사진',
-                buildPhotoWidget),
+                (context, photo) => buildPhotoWidget(context, ref, photo)),
+            // Adjusted to pass ref
             AppSpacesBox.verticalSpaceXlarge,
           ],
         ),
@@ -116,8 +113,12 @@ class _TeamIntroductionScreenState
     );
   }
 
-  Widget teamInfoSection<T>(Future<List<T>> itemsFuture, String type,
-      Widget Function(T) buildFunction) {
+  Widget teamInfoSection<T>(
+      BuildContext context,
+      WidgetRef ref,
+      Future<List<T>> itemsFuture,
+      String type,
+      Widget Function(BuildContext, T) buildFunction) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: FutureBuilder<List<T>>(
@@ -131,21 +132,41 @@ class _TeamIntroductionScreenState
             return Text('등록된 $type 이 없습니다.');
           } else {
             return Row(
-                children:
-                    snapshot.data!.map((item) => buildFunction(item)).toList());
+                children: snapshot.data!
+                    .map((item) => buildFunction(context, item))
+                    .toList());
           }
         },
       ),
     );
   }
 
-  Widget buildPhotoWidget(TeamPhotoModel photo) {
+  Widget buildPhotoWidget(
+      BuildContext context, WidgetRef ref, TeamPhotoModel photo) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
+        final teamController = ref.read(TeamControllerProvider.notifier);
+        final List<TeamPhotoModel> photos =
+            await teamController.getTeamPhotosList(teamModel.team_id);
+        final int initialIndex = photos.indexOf(photo);
+        final List<String> imagePaths =
+            photos.map((e) => e.image_path).toList();
+        print(imagePaths);
+
         showDialog(
+          useSafeArea: false,
           context: context,
-          builder: (BuildContext context) =>
-              Dialog(child: CommonFullScreenImage(imagePath: photo.image_path)),
+          builder: (BuildContext context) => Dialog(
+            insetPadding: EdgeInsets.all(0),
+            child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              child: CommonFullScreenImage(
+                initialIndex: initialIndex,
+                imagePaths: imagePaths,
+              ),
+            ),
+          ),
         );
       },
       child: Container(
@@ -159,7 +180,8 @@ class _TeamIntroductionScreenState
     );
   }
 
-  Widget buildScheduleWidget(TeamScheduleInfoModel scheduleInfoModel) {
+  Widget buildScheduleWidget(
+      BuildContext context, TeamScheduleInfoModel scheduleInfoModel) {
     return Container(
       width: 170,
       child: TeamScheduleInfoCard(

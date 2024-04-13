@@ -1,6 +1,7 @@
 import 'package:derbymatch/features/auth/screens/login_screen.dart';
 import 'package:derbymatch/features/court/screens/court_detail_screen.dart';
 import 'package:derbymatch/features/court/screens/court_list_screen.dart';
+import 'package:derbymatch/features/match/screens/create_match_screen.dart';
 import 'package:derbymatch/features/onboarding/screens/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
@@ -42,9 +43,6 @@ final loggedInRoute = RouteMap(
     '/createTeam': (_) => MaterialPage(
           child: CreateTeamScreen(),
         ),
-    // '/team': (_) => MaterialPage(
-    //       child: TeamMainScreen(),
-    //     ),
     '/team/:team_id': (_) => MaterialPage(
           child: TeamDetailScreen(),
         ),
@@ -53,6 +51,9 @@ final loggedInRoute = RouteMap(
         ),
     '/court/:court_id': (_) => MaterialPage(
           child: CourtDetailScreen(),
+        ),
+    '/createMatch': (_) => MaterialPage(
+          child: CreateMatchScreen(),
         ),
     //   '/create-community': (_) =>
     //       const MaterialPage(child: CreateCommunityScreen()),

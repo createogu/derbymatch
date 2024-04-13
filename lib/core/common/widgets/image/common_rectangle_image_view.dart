@@ -44,6 +44,7 @@ class CommonSquareImageView extends ConsumerWidget {
                               headers: token != null
                                   ? {'Authorization': 'Bearer $token'}
                                   : {},
+
                             ),
                             fit: BoxFit.cover,
                           ),

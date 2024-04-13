@@ -20,7 +20,9 @@ class OpenBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () => _openBottomSheet(context),
+      onPressed: () {
+        _openBottomSheet(context);
+      },
       child: Text(
         buttonText,
         style: textStyle ??
@@ -32,12 +34,13 @@ class OpenBottomSheet extends StatelessWidget {
 
   void _openBottomSheet(BuildContext context) {
     showModalBottomSheet(
-      scrollControlDisabledMaxHeightRatio: heightRatio,
-      context: context,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (BuildContext context) => child,
-    );
+        scrollControlDisabledMaxHeightRatio: heightRatio,
+        context: context,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+        ),
+        builder: (BuildContext context) {
+          return child;
+        });
   }
 }

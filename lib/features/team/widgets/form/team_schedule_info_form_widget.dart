@@ -199,8 +199,8 @@ class _TeamScheduleInfoFormWidgetState
                           court_id: selectedCourtId!,
                           day_of_week: selectedDay,
                           start_time:
-                              utils().formatTimeOfDay(selectedStartTime),
-                          end_time: utils().formatTimeOfDay(selectedEndTime));
+                              utils().timeOfDayToString(selectedStartTime),
+                          end_time: utils().timeOfDayToString(selectedEndTime));
                   await ref
                       .read(TeamControllerProvider.notifier)
                       .addTeamSchedule(scheduleInfoCommand);
