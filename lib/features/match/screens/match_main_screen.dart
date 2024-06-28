@@ -1,25 +1,36 @@
+import 'package:derbymatch/features/match/screens/match_list_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:routemaster/routemaster.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MatchMainScreen extends StatefulWidget {
+import '../../auth/controllers/user_me_controller.dart';
+import '../../auth/models/user_model.dart';
+
+class MatchMainScreen extends ConsumerStatefulWidget {
   const MatchMainScreen({super.key});
 
   @override
-  State<MatchMainScreen> createState() => _MatchMainScreenState();
+  ConsumerState<MatchMainScreen> createState() => _MatchMainScreenState();
 }
 
-class _MatchMainScreenState extends State<MatchMainScreen> {
+class _MatchMainScreenState extends ConsumerState<MatchMainScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: TextButton(
-          onPressed: () {
-            Routemaster.of(context).push('/createMatch');
-          },
-          child: Text('매치생성'),
+    final user = ref.watch(userMeProvider) as UserModel;
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        // ElevatedButton(
+        //   onPressed: () {
+        //     Routemaster.of(context).push('/createMatch');
+        //   },
+        //   child: Text('매치생성'),
+        // ),
+        Expanded(
+          flex: 3,
+          child: MatchListScreen(),
         ),
-      ),
+      ],
     );
   }
 }

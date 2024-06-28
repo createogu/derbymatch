@@ -26,7 +26,6 @@ class _CommonDoubleTimeSelectorState
     extends ConsumerState<CommonDoubleTimeSelector> {
   Future<void> _selectTime(BuildContext context, bool isStartTime) async {
     final TimeOfDay? picked = await showTimePicker(
-      barrierLabel: '야야',
       helpText: '${isStartTime ? '시작' : '종료'}시간을 선택해주세요',
       cancelText: '취소',
       confirmText: '선택',
@@ -39,7 +38,37 @@ class _CommonDoubleTimeSelectorState
           isStartTime ? widget.selectedStartTime : widget.selectedEndTime,
       builder: (BuildContext context, Widget? child) {
         return Theme(
-          data: ref.watch(themeNotifierProvider),
+          data: ThemeData(
+            timePickerTheme: TimePickerThemeData(
+              elevation: 0,
+              backgroundColor: Pallete.whiteColor,
+              dayPeriodTextColor: Pallete.greyColor,
+              hourMinuteColor: Pallete.greyColor.withOpacity(0.1),
+              hourMinuteTextColor: Pallete.greyColor,
+              entryModeIconColor: Pallete.greyColor,
+              helpTextStyle: AppTextStyles.headlineTextStyle,
+              cancelButtonStyle: ButtonStyles.seconderyButton.copyWith(
+                textStyle: MaterialStatePropertyAll<TextStyle>(
+                  AppTextStyles.bodyTextStyle.copyWith(
+                    color: Pallete.greyColor,
+                  ),
+                ),
+                minimumSize: MaterialStatePropertyAll<Size>(
+                  Size(MediaQuery.of(context).size.width / 3, 50),
+                ),
+              ),
+              confirmButtonStyle: ButtonStyles.primaryButton.copyWith(
+                textStyle: MaterialStatePropertyAll<TextStyle>(
+                  AppTextStyles.bodyTextStyle.copyWith(
+                    color: Pallete.greyColor,
+                  ),
+                ),
+                minimumSize: MaterialStatePropertyAll<Size>(
+                  Size(MediaQuery.of(context).size.width / 3, 50),
+                ),
+              ),
+            ),
+          ),
           child: MediaQuery(
             data: MediaQuery.of(context).copyWith(
               alwaysUse24HourFormat: false,

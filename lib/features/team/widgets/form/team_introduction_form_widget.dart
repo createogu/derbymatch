@@ -65,20 +65,6 @@ class _TeamIntroductionFormWidgetState
                 flex: 1,
                 child: Row(
                   children: [
-                    // Expanded(
-                    //   flex: 1,
-                    //   child: ElevatedButton(
-                    //     onPressed: () {
-                    //       Navigator.of(context).pop();
-                    //     },
-                    //     child: Text(
-                    //       '임시저장',
-                    //       style: AppTextStyles.bodyTextStyle
-                    //           .copyWith(color: Pallete.primaryColor),
-                    //     ),
-                    //     style: ButtonStyles.seconderyButton,
-                    //   ),
-                    // ),
                     AppSpacesBox.horizontalSpaceMicro,
                     Expanded(
                       flex: 2,

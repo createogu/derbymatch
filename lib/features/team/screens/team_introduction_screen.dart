@@ -1,4 +1,5 @@
 import 'package:derbymatch/core/common/widgets/divider/title_divider.dart';
+import 'package:derbymatch/core/theme/pallete.dart';
 import 'package:derbymatch/core/values/values.dart';
 import 'package:derbymatch/features/team/controllers/TeamController.dart';
 import 'package:derbymatch/features/team/models/team_model.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/common/controllers/CommCodeController.dart';
 import '../../../core/common/widgets/bottomSheer/open_bottom_sheet.dart';
+import '../../../core/common/widgets/divider/common_divider.dart';
 import '../../../core/common/widgets/image/common_full_screen_image.dart';
 import '../../../core/common/widgets/image/common_rectangle_image_view.dart';
 import '../widgets/form/team_photo_form_widget.dart';
@@ -25,9 +27,13 @@ class TeamIntroductionScreen extends ConsumerWidget {
     return Expanded(
       child: Column(
         children: [
-          Text(title, style: AppTextStyles.bodyTextStyle),
-          SizedBox(height: 8),
-          Text(value, style: AppTextStyles.infoTextStyle),
+          Text(title,
+              style: AppTextStyles.cautionTextStyle
+                  .copyWith(color: Pallete.greyColor)),
+          AppSpacesBox.verticalSpaceMicro,
+          Text(value,
+              style: AppTextStyles.infoTextStyle
+                  .copyWith(fontWeight: FontWeight.w700)),
         ],
       ),
     );
@@ -40,7 +46,7 @@ class TeamIntroductionScreen extends ConsumerWidget {
 
     return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.all(AppSpaceSize.mediumSize),
+        padding: EdgeInsets.all(AppSpaceSize.defaultSize),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -54,24 +60,33 @@ class TeamIntroductionScreen extends ConsumerWidget {
                 ),
               ),
             ),
-            Row(
-              children: [
-                infoSection('창립년도', '${teamModel.since_year}년'),
-                infoSection('활동지역', teamModel.addressName),
-                infoSection(
-                    '부종',
-                    commCodeController.getCommCodeName(
-                            'division', teamModel.division) ??
-                        '정보 없음'),
-              ],
+            Container(
+              decoration: BoxDecoration(
+                  color: Pallete.greyColor.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(10)),
+              child: Padding(
+                padding: EdgeInsets.all(AppSpaceSize.mediumSize),
+                child: Row(
+                  children: [
+                    infoSection('창립년도', '${teamModel.since_year}년'),
+                    infoSection('활동지역', teamModel.addressName),
+                    infoSection(
+                        '부종',
+                        commCodeController.getCommCodeName(
+                                'division', teamModel.division) ??
+                            '정보 없음'),
+                  ],
+                ),
+              ),
             ),
-            SizedBox(height: 20),
+            AppSpacesBox.verticalSpaceLarge,
             Container(
               alignment: Alignment.topLeft,
               child:
                   Text(teamModel.introduce, style: AppTextStyles.infoTextStyle),
             ),
-            SizedBox(height: 20),
+            // CommonDivider(),
+            AppSpacesBox.verticalSpaceLarge,
             TitleDivider(
               title: '⏰ 정기모임',
               leadingButton: Container(
@@ -88,7 +103,7 @@ class TeamIntroductionScreen extends ConsumerWidget {
                 teamController.getTeamSchedules(teamModel.team_id),
                 '일정',
                 buildScheduleWidget),
-            AppSpacesBox.verticalSpaceMedium,
+            AppSpacesBox.verticalSpaceLarge,
             TitleDivider(
               title: '📷 사진',
               leadingButton: Container(
@@ -184,8 +199,11 @@ class TeamIntroductionScreen extends ConsumerWidget {
       BuildContext context, TeamScheduleInfoModel scheduleInfoModel) {
     return Container(
       width: 170,
-      child: TeamScheduleInfoCard(
-        teamScheduleInfoModel: scheduleInfoModel,
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(AppSpaceSize.smallSize, 0, 0, 0),
+        child: TeamScheduleInfoCard(
+          teamScheduleInfoModel: scheduleInfoModel,
+        ),
       ),
     );
   }

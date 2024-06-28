@@ -5,8 +5,9 @@ class MatchCommand {
   final String start_time; // 'HH:mm' 형식의 시간
   final String end_time;
   final int court_id;
+  final String court_name;
   final int organizer_id;
-  final String status;
+  final String match_status;
 
 //<editor-fold desc="Data Methods">
   const MatchCommand({
@@ -16,8 +17,9 @@ class MatchCommand {
     required this.start_time,
     required this.end_time,
     required this.court_id,
+    required this.court_name,
     required this.organizer_id,
-    required this.status,
+    required this.match_status,
   });
 
   @override
@@ -31,8 +33,9 @@ class MatchCommand {
           start_time == other.start_time &&
           end_time == other.end_time &&
           court_id == other.court_id &&
+          court_name == other.court_name &&
           organizer_id == other.organizer_id &&
-          status == other.status);
+          match_status == other.match_status);
 
   @override
   int get hashCode =>
@@ -42,8 +45,9 @@ class MatchCommand {
       start_time.hashCode ^
       end_time.hashCode ^
       court_id.hashCode ^
+      court_name.hashCode ^
       organizer_id.hashCode ^
-      status.hashCode;
+      match_status.hashCode;
 
   @override
   String toString() {
@@ -54,8 +58,9 @@ class MatchCommand {
         ' start_time: $start_time,' +
         ' end_time: $end_time,' +
         ' court_id: $court_id,' +
+        ' court_name: $court_name,' +
         ' organizer_id: $organizer_id,' +
-        ' status: $status,' +
+        ' match_status: $match_status,' +
         '}';
   }
 
@@ -66,8 +71,9 @@ class MatchCommand {
     String? start_time,
     String? end_time,
     int? court_id,
+    String? court_name,
     int? organizer_id,
-    String? status,
+    String? match_status,
   }) {
     return MatchCommand(
       match_id: match_id ?? this.match_id,
@@ -76,8 +82,9 @@ class MatchCommand {
       start_time: start_time ?? this.start_time,
       end_time: end_time ?? this.end_time,
       court_id: court_id ?? this.court_id,
+      court_name: court_name ?? this.court_name,
       organizer_id: organizer_id ?? this.organizer_id,
-      status: status ?? this.status,
+      match_status: match_status ?? this.match_status,
     );
   }
 
@@ -89,8 +96,9 @@ class MatchCommand {
       'start_time': this.start_time,
       'end_time': this.end_time,
       'court_id': this.court_id,
+      'court_name': this.court_name,
       'organizer_id': this.organizer_id,
-      'status': this.status,
+      'match_status': this.match_status,
     };
   }
 
@@ -102,8 +110,9 @@ class MatchCommand {
       start_time: map['start_time'] as String,
       end_time: map['end_time'] as String,
       court_id: map['court_id'] as int,
+      court_name: map['court_name'] as String,
       organizer_id: map['organizer_id'] as int,
-      status: map['status'] as String,
+      match_status: map['match_status'] as String,
     );
   }
 

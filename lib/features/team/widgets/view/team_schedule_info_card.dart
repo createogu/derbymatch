@@ -19,7 +19,12 @@ class TeamScheduleInfoCard extends ConsumerWidget {
     final commCodeController = ref.read(commCodeControllerProvider.notifier);
 
     return Container(
-      margin: EdgeInsets.all(AppSpaceSize.smallSize),
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: Pallete.greyColor.withOpacity(0.2),
+        ),
+        borderRadius: BorderRadius.circular(AppSpaceSize.mediumSize),
+      ),
       child: Padding(
         padding: EdgeInsets.all(AppSpaceSize.mediumSize),
         child: Column(
@@ -35,25 +40,27 @@ class TeamScheduleInfoCard extends ConsumerWidget {
                         'days', teamScheduleInfoModel.day_of_week) ??
                     '정보없음',
                 style: AppTextStyles.infoTextStyle
-                    .copyWith(color: Pallete.greyColor),
+                    .copyWith(color: Pallete.primaryColor),
               ),
               backgroundColor: (teamScheduleInfoModel.day_of_week == '06' ||
                       teamScheduleInfoModel.day_of_week == '07')
                   ? Colors.red.withOpacity(0.1) // 주말은 빨간색
-                  : Pallete.greyColor.withOpacity(0.1), // 평일은 회색
+                  : Pallete.primaryColor.withOpacity(0.1), // 평일은 회색
             ),
             AppSpacesBox.verticalSpaceMicro,
             Text(
               '${teamScheduleInfoModel.start_time} - ${teamScheduleInfoModel.end_time}',
-              style: AppTextStyles.headlineTextStyle,
+              style: AppTextStyles.bodyTextStyle.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
             ),
             AppSpacesBox.verticalSpaceMicro,
             Text(
               '${teamScheduleInfoModel.court_name}\n',
               maxLines: 2,
               overflow: TextOverflow.ellipsis, // 긴 텍스트는 말줄임표로 표시
-              style: AppTextStyles.infoTextStyle.copyWith(
-                color: Pallete.greyColor.withOpacity(0.7),
+              style: AppTextStyles.cautionTextStyle.copyWith(
+                color: Pallete.greyColor.withOpacity(0.9),
               ),
             ),
           ],

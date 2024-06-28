@@ -25,7 +25,7 @@ class TitleDivider extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: AppTextStyles.bodyTextStyle,
+                  style: AppTextStyles.headlineTextStyle,
                 ),
                 if (subTitle != null)
                   Text(
@@ -38,11 +38,7 @@ class TitleDivider extends StatelessWidget {
             if (leadingButton != null) leadingButton,
           ],
         ),
-        Divider(
-          color: Pallete.greyColor.withOpacity(0.1),
-          thickness: 1,
-          height: AppSpaceSize.mediumSize,
-        ),
+        AppSpacesBox.verticalSpaceSmall,
       ],
     );
   }

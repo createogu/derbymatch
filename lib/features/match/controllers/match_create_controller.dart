@@ -1,5 +1,4 @@
 import 'package:derbymatch/features/match/commands/match_command.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -38,8 +37,9 @@ class MatchCreateController extends StateNotifier<MatchCommand> {
     start_time: '00:00',
     end_time: '02:00',
     court_id: 0,
+    court_name: '',
     organizer_id: 0,
-    status: '01',
+    match_status: '01',
   );
 
   Future<MatchCommand> editMatchModel({

@@ -59,19 +59,25 @@ class _TeamMainScreenState extends ConsumerState<TeamDetailScreen>
         } else if (snapshot.hasData) {
           return Scaffold(
             appBar: AppBar(
-              leadingWidth: 100,
               title: Text(
+                textAlign: TextAlign.start,
                 snapshot.data!.name, // 팀 이름을 타이틀로 사용
-                style: AppTextStyles.titleTextStyle,
+                style: AppTextStyles.bodyTextStyle,
               ),
               actions: [
                 IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.share),
+                  icon: Icon(
+                    Icons.share,
+                    color: Pallete.greyColor,
+                  ),
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.settings),
+                  icon: Icon(
+                    Icons.settings,
+                    color: Pallete.greyColor,
+                  ),
                 ),
               ],
               bottom: PreferredSize(

@@ -33,6 +33,20 @@ class Pallete {
     drawerTheme: const DrawerThemeData(
       backgroundColor: primaryColor,
     ),
+    timePickerTheme: TimePickerThemeData(
+      backgroundColor: whiteColor,
+      dialHandColor: primaryColor,
+      // 시간 선택기의 핸드 색상을 주황색으로 설정
+      dialTextColor: greyColor,
+      // 다이얼 텍스트 색상을 검정색으로 설정
+      hourMinuteTextColor: greyColor,
+      // 시간과 분의 텍스트 색상을 검정색으로 설정
+      dayPeriodTextColor: greyColor,
+      // AM/PM 텍스트 색상을 검정색으로 설정
+      entryModeIconColor: greyColor,
+      // 입력 모드 아이콘 색상을 검정색으로 설정
+      helpTextStyle: TextStyle(color: Colors.black), // 도움말 텍스트 스타일을 검정색으로 설정
+    ),
     primaryColor: redColor,
     backgroundColor:
         primaryColor, // will be used as alternative background color

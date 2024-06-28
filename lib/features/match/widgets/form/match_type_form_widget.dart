@@ -145,19 +145,6 @@ class _MatchTypeFormWidgetState extends ConsumerState<MatchTypeFormWidget>
               children: <Widget>[
                 Expanded(
                   flex: 1,
-                  child: TextButton(
-                    onPressed: () {
-                      widget.goPrevPage();
-                    },
-                    child: Text("이전",
-                        style: AppTextStyles.bodyTextStyle
-                            .copyWith(color: Pallete.primaryColor)),
-                    style: ButtonStyles.seconderyButton,
-                  ),
-                ),
-                AppSpacesBox.horizontalSpaceSmall,
-                Expanded(
-                  flex: 2,
                   child: ElevatedButton(
                     onPressed: () async {
                       await ref

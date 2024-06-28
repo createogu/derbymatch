@@ -1,4 +1,5 @@
 import 'package:derbymatch/features/auth/screens/login_screen.dart';
+import 'package:derbymatch/features/community/screens/post_detail_screen.dart';
 import 'package:derbymatch/features/court/screens/court_detail_screen.dart';
 import 'package:derbymatch/features/court/screens/court_list_screen.dart';
 import 'package:derbymatch/features/match/screens/create_match_screen.dart';
@@ -6,7 +7,10 @@ import 'package:derbymatch/features/onboarding/screens/onboarding_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
 
+import '../../../features/community/screens/comment_detail_screen.dart';
+import '../../../features/community/screens/create_post_screen.dart';
 import '../../../features/main/screens/main_screen.dart';
+import '../../../features/match/screens/match_detail_screen.dart';
 import '../../../features/player/screens/player_detail_screen.dart';
 import '../../../features/profile/screens/create_user_profile_screen.dart';
 import '../../../features/splashscreen/screens/splash_screen.dart';
@@ -16,6 +20,7 @@ import '../../../features/team/screens/team_detail_screen.dart';
 
 final loadingRoute = RouteMap(routes: {
   '/': (_) => MaterialPage(child: SplashScreen()),
+  '/login': (_) => MaterialPage(child: SplashScreen()),
 });
 final loggedOutRoute = RouteMap(
   onUnknownRoute: (routeData) => Redirect('/'),
@@ -55,6 +60,20 @@ final loggedInRoute = RouteMap(
     '/createMatch': (_) => MaterialPage(
           child: CreateMatchScreen(),
         ),
+    '/match/:match_id': (_) => MaterialPage(
+          child: MatchDetailScreen(),
+        ),
+
+    '/community/create': (_) => MaterialPage(
+          child: CreatePostScreen(),
+        ),
+    '/community/:post_id': (_) => MaterialPage(
+          child: PostDetailScreen(),
+        ),
+    '/community/:post_id/:comment_id': (_) => MaterialPage(
+          child: CommentDetailScreen(),
+        ),
+
     //   '/create-community': (_) =>
     //       const MaterialPage(child: CreateCommunityScreen()),
     //   '/r/:name': (route) => MaterialPage(

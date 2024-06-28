@@ -6,8 +6,8 @@ import '../../../../core/values/values.dart';
 import '../controllers/TeamController.dart';
 import '../controllers/TeamFilterController.dart';
 import '../models/team_model.dart';
-import '../widgets/team_filter_bottom_sheet.dart';
 import '../widgets/team_card.dart';
+import '../widgets/team_filter_bottom_sheet.dart';
 
 class TeamListScreen extends ConsumerStatefulWidget {
   const TeamListScreen({super.key});
@@ -99,49 +99,29 @@ class _TeamMainScreenState extends ConsumerState<TeamListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Pallete.whiteColor,
-      body: Padding(
-        padding: EdgeInsets.all(AppSpaceSize.mediumSize),
-        child: teams.isEmpty && !isLoading
-            ? Center(child: Text('팀 목록이 없습니다.'))
-            : ListView.builder(
-                controller: _scrollController,
-                itemCount: teams.length + (isLoading ? 1 : 0),
-                itemBuilder: (context, index) {
-                  if (index < teams.length) {
-                    return Column(
-                      children: [
-                        Container(
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-
-                              ],
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: AppSpaceSize.smallSize),
-                          child: TeamCard(team: teams[index]),
-                        ),
-                        if (index < teams.length - 1)
-                          Divider(
-                            color: Pallete.greyColor.withOpacity(0.1),
-                          ),
-                        // 마지막 아이템에는 Divider를 추가하지 않음
-                      ],
-                    );
-                  } else {
-                    return isLastPage
-                        ? Container()
-                        : Center(
-                            child: CircularProgressIndicator(),
-                          );
-                  }
-                },
-              ),
-      ),
+      body: teams.isEmpty && !isLoading
+          ? Center(child: Text('팀 목록이 없습니다.'))
+          : ListView.builder(
+              controller: _scrollController,
+              itemCount: teams.length + (isLoading ? 1 : 0),
+              itemBuilder: (context, index) {
+                if (index < teams.length) {
+                  return Column(
+                    children: [
+                      TeamCard(team: teams[index]),
+                      if (index < teams.length - 1)
+                        AppSpacesBox.verticalSpaceSmall,
+                    ],
+                  );
+                } else {
+                  return isLastPage
+                      ? Container()
+                      : Center(
+                          child: CircularProgressIndicator(),
+                        );
+                }
+              },
+            ),
     );
   }
 

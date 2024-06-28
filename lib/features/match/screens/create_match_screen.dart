@@ -1,4 +1,5 @@
-import 'package:derbymatch/features/match/widgets/form/match_date_tiem_form_widget.dart';
+import 'package:derbymatch/features/match/widgets/form/match_court_form_widget.dart';
+import 'package:derbymatch/features/match/widgets/form/match_date_time_form_widget.dart';
 import 'package:derbymatch/features/match/widgets/form/match_type_form_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -25,6 +26,7 @@ class _CreateMatchScreenState extends ConsumerState<CreateMatchScreen> {
     matchCreateStep = [
       MatchTypeFormWidget(goNextPage: goNextPage, goPrevPage: goPrevPage),
       MatchDateTimeFormWidget(goNextPage: goNextPage, goPrevPage: goPrevPage),
+      MatchCourtFormWidget(goNextPage: goNextPage, goPrevPage: goPrevPage),
     ];
   }
 

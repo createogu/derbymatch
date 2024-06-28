@@ -1,9 +1,11 @@
+import 'package:derbymatch/core/layout/main_screen_layout.dart';
 import 'package:derbymatch/core/theme/pallete.dart';
 import 'package:derbymatch/features/home/screens/home_main_screen.dart';
 import 'package:derbymatch/features/setting/screens/setting_main_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/layout/default_layout.dart';
+import '../../community/screens/community_main_screen.dart';
 import '../../match/screens/match_main_screen.dart';
 import '../../player/screens/player_main_screen.dart';
 import '../../team/screens/team_main_screen.dart';
@@ -92,15 +94,17 @@ class _MainScreenState extends State<MainScreen>
         physics: NeverScrollableScrollPhysics(),
         children: [
           HomeMainScreen(),
-          DefaultLayout(
+          MainScreenLayout(
+            title: 'TEAM',
             child: TeamMainScreen(),
           ),
-          DefaultLayout(
+          MainScreenLayout(
+            title: 'MATCH',
             child: MatchMainScreen(),
           ),
-          DefaultLayout(
+          MainScreenLayout(
             title: '커뮤니티',
-            child: PlayerMainScreen(),
+            child: CommunityMainScreen(),
           ),
           DefaultLayout(
             child: SettingMainScreen(),

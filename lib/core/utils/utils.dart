@@ -23,7 +23,12 @@ class utils {
 
 // DateTime을 문자열로 변환
   String dateTimeToString(DateTime dateTime) {
-    return DateFormat("yyyy-MM-dd HH:mm:ss").format(dateTime);
+    return DateFormat("yyyy-MM-dd").format(dateTime);
+  }
+
+  String dateTimeToString2(DateTime dateTime) {
+    dateTime = dateTime.toLocal();
+    return DateFormat("yyyy-MM-dd HH:mm").format(dateTime);
   }
 
   String timeOfDayToString(TimeOfDay time) {
@@ -35,7 +40,6 @@ class utils {
   TimeOfDay stringToTimeOfDay(String time) {
     final String hour = time.substring(0, 2);
     final String minute = time.substring(3, 5);
-    print(TimeOfDay(hour: int.parse(hour), minute: int.parse(minute)));
     return TimeOfDay(hour: int.parse(hour), minute: int.parse(minute));
   }
 }

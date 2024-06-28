@@ -20,37 +20,34 @@ class _LoginViewState extends ConsumerState<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: SizedBox(
-        width: double.infinity,
-        child: Padding(
-          padding: EdgeInsets.all(AppSpaceSize.mediumSize),
-          child: Column(
-            children: <Widget>[
-              Spacer(
-                flex: 1,
+      body: Padding(
+        padding: EdgeInsets.all(AppSpaceSize.defaultSize),
+        child: Column(
+          children: <Widget>[
+            Spacer(
+              flex: 1,
+            ),
+            Expanded(
+              flex: 3,
+              child: Image.asset(Constants.logoPath),
+            ),
+            Expanded(
+              flex: 1,
+              child: Text(
+                "Prove You're the Best in Your Region",
+                style: AppTextStyles.bodyTextStyle,
               ),
-              Expanded(
-                flex: 3,
-                child: Image.asset(Constants.logoPath),
-              ),
-              Expanded(
-                flex: 1,
-                child: Text(
-                  "Prove You're the Best in Your Region",
-                  style: AppTextStyles.bodyTextStyle,
-                ),
-              ),
-              Spacer(
-                flex: 3,
-              ),
-              Container(
-                child: KaKaoLoginButton(),
-              ),
-              Spacer(
-                flex: 1,
-              ),
-            ],
-          ),
+            ),
+            Spacer(
+              flex: 3,
+            ),
+            Container(
+              child: KaKaoLoginButton(),
+            ),
+            Spacer(
+              flex: 1,
+            ),
+          ],
         ),
       ),
     );

@@ -29,19 +29,62 @@ class AppInputStyles {
     // 패딩 조정F
     border: OutlineInputBorder(
       // 기본 테두리
+      borderSide: BorderSide(color: Pallete.greyColor),
+      borderRadius: BorderRadius.all(Radius.circular(AppSpaceSize.smallSize)),
+    ),
+    enabledBorder: OutlineInputBorder(
+      // 활성화되지 않았을 때의 테두리
+      borderSide: BorderSide(color: Pallete.greyColor),
+      borderRadius: BorderRadius.all(Radius.circular(AppSpaceSize.smallSize)),
+    ),
+    focusedBorder: OutlineInputBorder(
+      // 포커스 받았을 때의 테두리
+      borderSide: BorderSide(color: Pallete.greyColor),
+      borderRadius: BorderRadius.all(
+        Radius.circular(AppSpaceSize.smallSize),
+      ),
+    ),
+  );
+
+  static final InputDecoration primaryFormFieldStyle =
+      defaultFormFieldStyle.copyWith(
+    border: OutlineInputBorder(
+      // 기본 테두리
       borderSide: BorderSide(color: Pallete.primaryColor),
-      borderRadius: BorderRadius.all(Radius.circular(AppSpaceSize.mediumSize)),
+      borderRadius: BorderRadius.all(Radius.circular(AppSpaceSize.smallSize)),
     ),
     enabledBorder: OutlineInputBorder(
       // 활성화되지 않았을 때의 테두리
       borderSide: BorderSide(color: Pallete.primaryColor),
-      borderRadius: BorderRadius.all(Radius.circular(AppSpaceSize.mediumSize)),
+      borderRadius: BorderRadius.all(Radius.circular(AppSpaceSize.smallSize)),
     ),
     focusedBorder: OutlineInputBorder(
       // 포커스 받았을 때의 테두리
       borderSide: BorderSide(color: Pallete.primaryColor),
       borderRadius: BorderRadius.all(
-        Radius.circular(AppSpaceSize.mediumSize),
+        Radius.circular(AppSpaceSize.smallSize),
+      ),
+    ),
+  );
+
+  static final InputDecoration noLineFormFieldStyle = InputDecoration(
+    contentPadding: EdgeInsets.all(AppSpaceSize.mediumSize),
+    // 패딩 조정F
+    border: OutlineInputBorder(
+      // 기본 테두리
+      borderSide: BorderSide(color: Pallete.whiteColor),
+      borderRadius: BorderRadius.all(Radius.circular(AppSpaceSize.smallSize)),
+    ),
+    enabledBorder: OutlineInputBorder(
+      // 활성화되지 않았을 때의 테두리
+      borderSide: BorderSide(color: Pallete.whiteColor),
+      borderRadius: BorderRadius.all(Radius.circular(AppSpaceSize.smallSize)),
+    ),
+    focusedBorder: OutlineInputBorder(
+      // 포커스 받았을 때의 테두리
+      borderSide: BorderSide(color: Pallete.whiteColor),
+      borderRadius: BorderRadius.all(
+        Radius.circular(AppSpaceSize.smallSize),
       ),
     ),
   );

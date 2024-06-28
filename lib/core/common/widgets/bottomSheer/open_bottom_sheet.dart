@@ -26,8 +26,7 @@ class OpenBottomSheet extends StatelessWidget {
       child: Text(
         buttonText,
         style: textStyle ??
-            AppTextStyles.cautionTextStyle
-                .copyWith(color: Pallete.primaryColor),
+            AppTextStyles.infoTextStyle.copyWith(color: Pallete.greyColor),
       ),
     );
   }
